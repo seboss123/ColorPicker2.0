@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ColorPicker 1.0</string>
+    <string name="red">Red</string>
+    <string name="green">Green</string>
+    <string name="blue">Blue</string>
+    <string name="startvalue">127</string>
+</resources>
