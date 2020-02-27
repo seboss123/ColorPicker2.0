@@ -1,7 +1,12 @@
 <resources>
-    <string name="app_name">ColorPicker 1.0</string>
+    <string name="app_name">ColorPicker 2.0</string>
     <string name="red">Red</string>
     <string name="green">Green</string>
     <string name="blue">Blue</string>
     <string name="startvalue">127</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
