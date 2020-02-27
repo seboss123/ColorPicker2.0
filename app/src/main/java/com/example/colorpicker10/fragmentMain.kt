@@ -103,10 +103,6 @@ class fragmentMain : Fragment() {
         view.context.startActivity(intent)
     }
 
-    override fun onDetach() {
-        super.onDetach()
-    }
-
 
     companion object {
         fun newInstance(): fragmentMain = fragmentMain()
