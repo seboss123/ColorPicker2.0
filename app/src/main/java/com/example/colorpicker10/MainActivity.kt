@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -28,8 +29,34 @@ class MainActivity : AppCompatActivity() {
         val redSeek = findViewById<SeekBar>(R.id.redSeekBar)
         val greenSeek = findViewById<SeekBar>(R.id.greenSeekBar)
         val blueSeek = findViewById<SeekBar>(R.id.blueSeekBar)
-
+        val colorName = findViewById<TextView>(R.id.colorName)
+        val showColor = findViewById<View>(R.id.showColor)
         setSupportActionBar(findViewById(R.id.my_toolbar))
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
+
+        supportActionBar!!.setLogo(R.mipmap.ic_launcher)
+        supportActionBar!!.setDisplayUseLogoEnabled(true)
+
+        val color = intent?.extras
+        if (color != null) {
+            val name = color.getString("colorName")
+            val red = color.getString("red")
+            val green = color.getString("green")
+            val blue = color.getString("blue")
+
+            Log.e("Intent", name.toString())
+            colorName.text = name
+            redSeek.progress = red!!.toInt()
+            greenSeek.progress = green!!.toInt()
+            blueSeek.progress = blue!!.toInt()
+            showColor.setBackgroundColor(Color.rgb(red.toInt(), green.toInt(), blue.toInt()))
+            redValue.text = red
+            greenValue.text = green
+            blueValue.text = blue
+
+
+        }
+
 
 
 
@@ -37,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 redVal = progress
                 redValue.text = redVal.toString()
-                showColor.setBackgroundColor(Color.argb(alpha,redVal,greenVal,blueVal))
+                showColor.setBackgroundColor(Color.argb(alpha, redVal, greenVal, blueVal))
 
             }
 
@@ -52,7 +79,7 @@ class MainActivity : AppCompatActivity() {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 greenVal = progress
                 greenValue.text = greenVal.toString()
-                showColor.setBackgroundColor(Color.argb(alpha,redVal,greenVal,blueVal))
+                showColor.setBackgroundColor(Color.argb(alpha, redVal, greenVal, blueVal))
 
             }
 
@@ -67,7 +94,7 @@ class MainActivity : AppCompatActivity() {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 blueVal = progress
                 blueValue.text = blueVal.toString()
-                showColor.setBackgroundColor(Color.argb(alpha,redVal,greenVal,blueVal))
+                showColor.setBackgroundColor(Color.argb(alpha, redVal, greenVal, blueVal))
 
             }
 
@@ -86,6 +113,16 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    fun addfragment() {
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        val fragment = fragmentMain()
+
+        fragmentTransaction.replace(R.id.fragmentView, fragment)
+        fragmentTransaction.commit()
+
+    }
+
     fun saveText(text: String) {
         val path = filesDir
         val letDirectory = File(path, "LET")
@@ -101,16 +138,17 @@ class MainActivity : AppCompatActivity() {
 
         when (item.itemId) {
             R.id.saveButton -> {
+                redVal = redSeekBar.progress
+                greenVal = greenSeekBar.progress
+                blueVal = blueSeekBar.progress
                 val colorTextView = findViewById<TextView>(R.id.colorName)
-
-
-
                 colorName = colorTextView.text.toString()
-
                 saveText(colorName + "," + redVal + "," + greenVal + "," + blueVal + "\n")
-
                 Log.e("It worked!!", colorName + " " + redVal + " " + greenVal + " " + blueVal)
                 return true
+            }
+            R.id.loadButton -> {
+                addfragment()
             }
             R.id.clearButton -> {
                 val path = filesDir
