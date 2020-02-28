@@ -1,4 +1,4 @@
-package com.example.colorpicker10
+package com.example.colorSaver
 
 import android.content.Intent
 import android.os.Bundle

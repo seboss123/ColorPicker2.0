@@ -1,4 +1,4 @@
-package com.example.colorpicker10
+package com.example.colorSaver
 
 import android.view.LayoutInflater
 import android.view.View
