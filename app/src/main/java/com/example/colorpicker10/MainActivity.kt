@@ -32,10 +32,10 @@ class MainActivity : AppCompatActivity() {
         val colorName = findViewById<TextView>(R.id.colorName)
         val showColor = findViewById<View>(R.id.showColor)
         setSupportActionBar(findViewById(R.id.my_toolbar))
-        supportActionBar!!.setDisplayShowHomeEnabled(true)
-
-        supportActionBar!!.setLogo(R.mipmap.ic_launcher)
-        supportActionBar!!.setDisplayUseLogoEnabled(true)
+//        supportActionBar!!.setDisplayShowHomeEnabled(true)
+//
+//        supportActionBar!!.setLogo(R.mipmap.ic_launcher)
+//        supportActionBar!!.setDisplayUseLogoEnabled(true)
 
         val color = intent?.extras
         if (color != null) {
@@ -46,10 +46,12 @@ class MainActivity : AppCompatActivity() {
 
             Log.e("Intent", name.toString())
             colorName.text = name
-            redSeek.progress = red!!.toInt()
-            greenSeek.progress = green!!.toInt()
-            blueSeek.progress = blue!!.toInt()
+            if (red != null) redSeek.progress = red.toInt()
+            if (green != null) greenSeek.progress = green.toInt()
+            if (blue != null && green != null && red != null) {
+                blueSeek.progress = blue.toInt()
             showColor.setBackgroundColor(Color.rgb(red.toInt(), green.toInt(), blue.toInt()))
+            }
             redValue.text = red
             greenValue.text = green
             blueValue.text = blue
